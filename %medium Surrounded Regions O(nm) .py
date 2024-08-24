@@ -2,12 +2,14 @@ def solve(self, board: List[List[str]]) -> None:
     way = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
     def dfs(i, j):
-        if board[i][j] == 'O':
-            board[i][j] = None
+        if board[i][j] != 'O':
+            return
+            
+        board[i][j] = None
 
-            for x, y in way:
-                if 0 <= i + x < len(board) and 0 <= j + y < len(board[0]):
-                    dfs(i + x, j + y)
+        for x, y in way:
+            if 0 <= i + x < len(board) and 0 <= j + y < len(board[0]):
+                dfs(i + x, j + y)
 
     for i in range(len(board)):
         dfs(i, 0)
