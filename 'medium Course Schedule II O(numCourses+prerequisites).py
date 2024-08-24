@@ -8,16 +8,18 @@ def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int
         if course in seen:
             return True
             
-        if course not in scheduled:
-            seen.add(course)
+        if course in scheduled:
+            return
+            
+        seen.add(course)
 
-            for prereq in graph[course]:
-                if dfs(prereq):
-                    return True
+        for prereq in graph[course]:
+            if dfs(prereq):
+                return True
 
-            seen.remove(course)
-            order.append(course)
-            scheduled.add(course)
+        seen.remove(course)
+        order.append(course)
+        scheduled.add(course)
 
     for course in range(numCourses):
         if dfs(course):
